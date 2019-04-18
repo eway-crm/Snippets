@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Update single item</Title>
+      <Shortcut></Shortcut>
+      <Description>Update single item.</Description>
+      <Author>Roman Štefko</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>TableName</ID>
+          <ToolTip>Name of the table</ToolTip>
+          <Default>TableName</Default>
+        </Literal>
+        <Literal>
+          <ID>FolderName</ID>
+          <ToolTip>Name of the folder</ToolTip>
+          <Default>FolderName</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[DECLARE @ItemGUID UNIQUEIDENTIFIER
+	SET @ItemGUID = (SELECT ItemGUID FROM $TableName$ WHERE 1 = 0) -- TODO: Specify item
+UPDATE $TableName$
+SET ItemVersion = ItemVersion + 1,
+	Server_ItemChanged = GETDATE(),
+	-- TODO: Add changes here
+WHERE ItemGUID = @ItemGUID
+
+IF @@ROWCOUNT = 1
+BEGIN
+	EXEC eWaySP_InsertIntoItemChanges @ItemGUID = @ItemGUID, @FolderName = '$FolderName$', @Removed = 0
+END]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

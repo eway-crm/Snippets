@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Add new server column</Title>
+      <Shortcut></Shortcut>
+      <Description>Script to add new column on the server.</Description>
+      <Author>Jan Timr, Roman Štefko, Jan Spilka</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ColumnName</ID>
+          <ToolTip>Name of the new column</ToolTip>
+          <Default>ColumnName</Default>
+        </Literal>
+        <Literal>
+          <ID>TableName</ID>
+          <ToolTip>Name of the table</ToolTip>
+          <Default>TableName</Default>
+        </Literal>
+		    <Literal>
+          <ID>ColumnType</ID>
+          <ToolTip>Type of the new column</ToolTip>
+          <Default>UNIQUEIDENTIFIER</Default>
+        </Literal>
+        <Literal>
+          <ID>ColumnDescription</ID>
+          <ToolTip>Description for the new column</ToolTip>
+          <Default>Column description</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[IF EXISTS(SELECT * FROM sys.columns 
+	WHERE [name] = N'$ColumnName$' AND [object_id] = OBJECT_ID(N'$TableName$'))
+BEGIN
+	PRINT('Column "$ColumnName$" already exists in table "$TableName$"')
+	RETURN
+END
+
+ALTER TABLE $TableName$
+ADD $ColumnName$ $ColumnType$ NULL
+
+EXEC eWaySP_SetTableColumnDescription N'$TableName$', '$ColumnName$', '$ColumnDescription$.'
+
+PRINT('Column "$ColumnName$" added to table "$TableName$"')]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Update multiple items</Title>
+      <Shortcut></Shortcut>
+      <Description>Update multiple items.</Description>
+      <Author>Roman Štefko</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>TableName</ID>
+          <ToolTip>Name of the table</ToolTip>
+          <Default>TableName</Default>
+        </Literal>
+        <Literal>
+          <ID>FolderName</ID>
+          <ToolTip>Name of the folder</ToolTip>
+          <Default>FolderName</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[DECLARE @UpdatedItems TABLE
+(
+	ItemGUID UNIQUEIDENTIFIER,
+	ItemVersion INT,
+	FileAs NVARCHAR(1280)
+)
+
+UPDATE $TableName$
+SET ItemVersion = ItemVersion + 1,
+	Server_ItemChanged = GETDATE(),
+	-- TODO: Add changes here
+OUTPUT inserted.ItemGUID, inserted.ItemVersion, inserted.FileAs INTO @UpdatedItems
+WHERE
+	1 = 0 -- TODO: Add filter
+
+INSERT INTO EWD_ItemChanges (ItemGUID, ObjectTypeID, ItemVersion, FileAs, Removed)
+SELECT ItemGUID, dbo.GetObjectTypeID('$FolderName$'), ItemVersion, FileAs, 0
+FROM @UpdatedItems]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

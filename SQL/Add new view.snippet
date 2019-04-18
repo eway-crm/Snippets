@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Add new view</Title>
+      <Shortcut></Shortcut>
+      <Description>Script to add new view on the server.</Description>
+      <Author>Roman Štefko</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ViewName</ID>
+          <ToolTip>Name of the view</ToolTip>
+          <Default>vw_ViewName</Default>
+        </Literal>
+		<Literal>
+          <ID>Author</ID>
+          <ToolTip>Name of the author</ToolTip>
+          <Default>Author</Default>
+        </Literal>
+		<Literal>
+          <ID>Date</ID>
+          <ToolTip>Date of the script creation</ToolTip>
+          <Default>Date</Default>
+        </Literal>
+		<Literal>
+          <ID>Description</ID>
+          <ToolTip>Description of the view</ToolTip>
+          <Default>Description</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[$ViewName$]'))
+DROP VIEW [dbo].[$ViewName$]
+GO
+-- =============================================
+-- Author:		$Author$
+-- Create date: $Date$
+-- Description:	$Description$
+-- =============================================
+CREATE VIEW [dbo].[$ViewName$]
+AS
+-- TODO: Add SELECT here
+GO]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Add new Scalar-valued function</Title>
+      <Shortcut></Shortcut>
+      <Description>Script to add new Scalar-valued function on the server.</Description>
+      <Author>Jan Timr, Roman Štefko</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>FunctionName</ID>
+          <ToolTip>Name of the function</ToolTip>
+          <Default>FunctionName</Default>
+        </Literal>
+		<Literal>
+          <ID>Author</ID>
+          <ToolTip>Name of the author</ToolTip>
+          <Default>Author</Default>
+        </Literal>
+		<Literal>
+          <ID>Date</ID>
+          <ToolTip>Date of the script creation</ToolTip>
+          <Default>Date</Default>
+        </Literal>
+		<Literal>
+          <ID>Description</ID>
+          <ToolTip>Description of the function</ToolTip>
+          <Default>Description</Default>
+        </Literal>
+        <Literal>
+          <ID>ParameterName</ID>
+          <ToolTip>Name of the parameter</ToolTip>
+          <Default>ParameterName</Default>
+        </Literal>
+        <Literal>
+          <ID>ParameterType</ID>
+          <ToolTip>Type of the parameter</ToolTip>
+          <Default>UNIQUEIDENTIFIER</Default>
+        </Literal>
+		<Literal>
+          <ID>ParameterDescription</ID>
+          <ToolTip>Description of the parameter</ToolTip>
+          <Default>ParameterDescription</Default>
+        </Literal>
+		<Literal>
+          <ID>ResultVariableName</ID>
+          <ToolTip>Name of the result variable</ToolTip>
+          <Default>ResultVariableName</Default>
+        </Literal>
+		<Literal>
+          <ID>ReturnType</ID>
+          <ToolTip>Return type of the function</ToolTip>
+          <Default>UNIQUEIDENTIFIER</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$FunctionName$]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[$FunctionName$]
+GO
+-- =============================================
+-- Author:		$Author$
+-- Create date: $Date$
+-- Description:	$Description$
+-- =============================================
+CREATE FUNCTION [dbo].[$FunctionName$]
+(
+	@$ParameterName$ $ParameterType$
+)
+RETURNS $ReturnType$
+AS
+BEGIN
+	DECLARE @$ResultVariableName$ $ReturnType$
+	
+	-- TODO: Add logic here
+
+	RETURN @$ResultVariableName$
+END
+GO
+
+EXEC dbo.eWaySP_SetFunctionDescription '$FunctionName$', '$Description$'
+EXEC dbo.eWaySP_SetFunctionParameterDescription '$FunctionName$', '@$ParameterName$', '$ParameterDescription$.']]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Add new procedure</Title>
+      <Shortcut></Shortcut>
+      <Description>Script to add new procedure on the server.</Description>
+      <Author>Roman Štefko</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ProcedureName</ID>
+          <ToolTip>Name of the procedure</ToolTip>
+          <Default>ProcedureName</Default>
+        </Literal>
+		<Literal>
+          <ID>Author</ID>
+          <ToolTip>Name of the author</ToolTip>
+          <Default>Author</Default>
+        </Literal>
+		<Literal>
+          <ID>Date</ID>
+          <ToolTip>Date of the script creation</ToolTip>
+          <Default>Date</Default>
+        </Literal>
+		<Literal>
+          <ID>Description</ID>
+          <ToolTip>Description of the function</ToolTip>
+          <Default>Description</Default>
+        </Literal>
+        <Literal>
+          <ID>ParameterName</ID>
+          <ToolTip>Name of the parameter</ToolTip>
+          <Default>ParameterName</Default>
+        </Literal>
+        <Literal>
+          <ID>ParameterType</ID>
+          <ToolTip>Type of the parameter</ToolTip>
+          <Default>UNIQUEIDENTIFIER</Default>
+        </Literal>
+		<Literal>
+          <ID>ParameterDescription</ID>
+          <ToolTip>Description of the parameter</ToolTip>
+          <Default>ParameterDescription</Default>
+        </Literal>
+		<Literal>
+          <ID>ResultVariableName</ID>
+          <ToolTip>Name of the result variable</ToolTip>
+          <Default>ResultVariableName</Default>
+        </Literal>
+		<Literal>
+          <ID>ReturnType</ID>
+          <ToolTip>Return type of the function</ToolTip>
+          <Default>UNIQUEIDENTIFIER</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$ProcedureName$]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[$ProcedureName$]
+GO
+-- =============================================
+-- Author:		$Author$
+-- Create date: $Date$
+-- Description:	$Description$
+-- =============================================
+CREATE PROCEDURE [dbo].[$ProcedureName$]
+(
+	@$ParameterName$ $ParameterType$
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	-- Abort procedure on first error
+	SET XACT_ABORT ON;
+
+	-- TODO: Add implementation here
+END
+GO
+
+EXEC dbo.eWaySP_SetProcedureDescription '$ProcedureName$', '$Description$'
+EXEC dbo.eWaySP_SetProcedureParameterDescription '$ProcedureName$', '@$ParameterName$', '$ParameterDescription$.']]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Create relations in batch</Title>
+      <Shortcut></Shortcut>
+      <Description>Create relations in batch.</Description>
+      <Author>eWay</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ParentFolderName</ID>
+          <ToolTip></ToolTip>
+          <Default>ParentFolderName</Default>
+        </Literal>
+        <Literal>
+          <ID>ChildFolderName</ID>
+          <ToolTip></ToolTip>
+          <Default>ChildFolderName</Default>
+        </Literal>
+        <Literal>
+          <ID>RelationType</ID>
+          <ToolTip></ToolTip>
+          <Default>GENERAL</Default>
+        </Literal>
+        <Literal>
+          <ID>SetDirection</ID>
+          <ToolTip></ToolTip>
+          <Default>0</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL">
+        <![CDATA[
+-- Create temp table
+IF OBJECT_ID('tempdb..#CreateRelationsInBatch') IS NOT NULL
+    DROP TABLE #CreateRelationsInBatch
+
+CREATE TABLE #CreateRelationsInBatch ( 
+    ParentDataGUID UNIQUEIDENTIFIER
+    , ChildDataGUID UNIQUEIDENTIFIER
+)
+
+-- Create relations $ParentFolderName$-$RelationType$-$ChildFolderName$, direction = $SetDirection$
+INSERT INTO #CreateRelationsInBatch
+SELECT $ParentFolderName$Source.ID, $ChildFolderName$Source.ID
+FROM table1 $ParentFolderName$Source
+INNER JOIN table2 $ChildFolderName$Source 
+    ON $ParentFolderName$Source = $ChildFolderName$Source
+
+EXEC eWaySP_CreateRelationsInBatch N'$ParentFolderName$', N'$ChildFolderName$', N'$RelationType$', $SetDirection$
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
