@@ -39,7 +39,7 @@
 
 UPDATE $TableName$
 SET ItemVersion = ItemVersion + 1,
-	Server_ItemChanged = GETDATE(),
+	Server_ItemChanged = SYSDATETIMEOFFSET(),
 	-- TODO: Add changes here
 OUTPUT inserted.ItemGUID, inserted.ItemVersion, inserted.FileAs INTO @UpdatedItems
 WHERE

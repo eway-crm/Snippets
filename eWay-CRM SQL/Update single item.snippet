@@ -34,7 +34,7 @@
 	SET @ItemGUID = (SELECT ItemGUID FROM $TableName$ WHERE 1 = 0) -- TODO: Specify item
 UPDATE $TableName$
 SET ItemVersion = ItemVersion + 1,
-	Server_ItemChanged = GETDATE(),
+	Server_ItemChanged = SYSDATETIMEOFFSET(),
 	-- TODO: Add changes here
 WHERE ItemGUID = @ItemGUID
 
