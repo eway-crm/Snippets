@@ -34,19 +34,20 @@
 (
 	ItemGUID UNIQUEIDENTIFIER,
 	ItemVersion INT,
-	FileAs NVARCHAR(1280)
+	FileAs NVARCHAR(1280),
+	ItemCreated DATETIMEOFFSET(2)
 )
 
 UPDATE $TableName$
 SET ItemVersion = ItemVersion + 1,
 	Server_ItemChanged = SYSDATETIMEOFFSET(),
 	-- TODO: Add changes here
-OUTPUT inserted.ItemGUID, inserted.ItemVersion, inserted.FileAs INTO @UpdatedItems
+OUTPUT inserted.ItemGUID, inserted.ItemVersion, inserted.FileAs, inserted.Server_ItemChanged INTO @UpdatedItems
 WHERE
 	1 = 0 -- TODO: Add filter
 
-INSERT INTO EWD_ItemChanges (ItemGUID, ObjectTypeID, ItemVersion, FileAs, Removed)
-SELECT ItemGUID, dbo.GetObjectTypeID('$FolderName$'), ItemVersion, FileAs, 0
+INSERT INTO EWD_ItemChanges (ItemGUID, ObjectTypeID, ItemVersion, FileAs, Removed, ItemCreated)
+SELECT ItemGUID, dbo.GetObjectTypeID('$FolderName$'), ItemVersion, FileAs, 0, ItemCreated
 FROM @UpdatedItems]]></Code>
     </Snippet>
   </CodeSnippet>
