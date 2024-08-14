@@ -44,19 +44,21 @@
         <![CDATA[
 -- Create temp table
 IF OBJECT_ID('tempdb..#CreateRelationsInBatch') IS NOT NULL
+BEGIN
     DROP TABLE #CreateRelationsInBatch
+END
 
-CREATE TABLE #CreateRelationsInBatch ( 
+CREATE TABLE #CreateRelationsInBatch (
     ParentDataGUID UNIQUEIDENTIFIER
-    , ChildDataGUID UNIQUEIDENTIFIER
+  , ChildDataGUID UNIQUEIDENTIFIER
 )
 
 -- Create relations $ParentFolderName$-$RelationType$-$ChildFolderName$, direction = $SetDirection$
 INSERT INTO #CreateRelationsInBatch
 SELECT $ParentFolderName$Source.ID, $ChildFolderName$Source.ID
-FROM table1 $ParentFolderName$Source
-INNER JOIN table2 $ChildFolderName$Source 
-    ON $ParentFolderName$Source = $ChildFolderName$Source
+FROM
+    table1 $ParentFolderName$Source
+    JOIN table2 $ChildFolderName$Source ON $ParentFolderName$Source = $ChildFolderName$Source
 
 EXEC eWaySP_CreateRelationsInBatch N'$ParentFolderName$', N'$ChildFolderName$', N'$RelationType$', $SetDirection$
 ]]>

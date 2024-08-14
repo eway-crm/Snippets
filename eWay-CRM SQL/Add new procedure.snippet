@@ -24,17 +24,17 @@
           <ToolTip>Name of the procedure</ToolTip>
           <Default>ProcedureName</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>Author</ID>
           <ToolTip>Name of the author</ToolTip>
           <Default>Author</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>Date</ID>
           <ToolTip>Date of the script creation</ToolTip>
           <Default>Date</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>Description</ID>
           <ToolTip>Description of the function</ToolTip>
           <Default>Description</Default>
@@ -49,49 +49,53 @@
           <ToolTip>Type of the parameter</ToolTip>
           <Default>UNIQUEIDENTIFIER</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>ParameterDescription</ID>
           <ToolTip>Description of the parameter</ToolTip>
           <Default>ParameterDescription</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>ResultVariableName</ID>
           <ToolTip>Name of the result variable</ToolTip>
           <Default>ResultVariableName</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>ReturnType</ID>
           <ToolTip>Return type of the function</ToolTip>
           <Default>UNIQUEIDENTIFIER</Default>
         </Literal>
       </Declarations>
       <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$ProcedureName$]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[$ProcedureName$]
+BEGIN
+    DROP PROCEDURE [dbo].[$ProcedureName$]
+END
 GO
 -- =============================================
--- Author:		$Author$
+-- Author:      $Author$
 -- Create date: $Date$
--- Description:	$Description$
+-- Description: $Description$
 -- =============================================
 CREATE PROCEDURE [dbo].[$ProcedureName$]
 (
-	@$ParameterName$ $ParameterType$
+    @$ParameterName$ $ParameterType$
 )
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
 
-	-- Abort procedure on first error
-	SET XACT_ABORT ON;
+    -- Abort procedure on first error
+    SET XACT_ABORT ON;
 
-	-- TODO: Add implementation here
+    -- TODO: Add implementation here
 END
 GO
 
-EXEC dbo.eWaySP_SetProcedureDescription '$ProcedureName$', '$Description$'
-EXEC dbo.eWaySP_SetProcedureParameterDescription '$ProcedureName$', '@$ParameterName$', '$ParameterDescription$.']]></Code>
+EXEC dbo.eWaySP_SetProcedureDescription '$ProcedureName$', '$Description$.'
+EXEC dbo.eWaySP_SetProcedureParameterDescription '$ProcedureName$', '@$ParameterName$', '$ParameterDescription$.'
+]]>
+      </Code>
     </Snippet>
   </CodeSnippet>
 </CodeSnippets>

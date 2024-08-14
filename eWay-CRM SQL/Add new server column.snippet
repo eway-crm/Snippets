@@ -29,7 +29,7 @@
           <ToolTip>Name of the table</ToolTip>
           <Default>TableName</Default>
         </Literal>
-		    <Literal>
+        <Literal>
           <ID>ColumnType</ID>
           <ToolTip>Type of the new column</ToolTip>
           <Default>UNIQUEIDENTIFIER</Default>
@@ -40,11 +40,10 @@
           <Default>Column description</Default>
         </Literal>
       </Declarations>
-      <Code Language="SQL"><![CDATA[IF EXISTS(SELECT * FROM sys.columns 
-	WHERE [name] = N'$ColumnName$' AND [object_id] = OBJECT_ID(N'$TableName$'))
+      <Code Language="SQL"><![CDATA[IF EXISTS(SELECT * FROM sys.columns WHERE [name] = N'$ColumnName$' AND [object_id] = OBJECT_ID(N'$TableName$'))
 BEGIN
-	PRINT('Column "$ColumnName$" already exists in table "$TableName$"')
-	RETURN
+    PRINT('Column "$ColumnName$" already exists in table "$TableName$"')
+    RETURN
 END
 
 ALTER TABLE $TableName$
@@ -52,7 +51,8 @@ ADD $ColumnName$ $ColumnType$ NULL
 
 EXEC eWaySP_SetTableColumnDescription N'$TableName$', '$ColumnName$', '$ColumnDescription$.'
 
-PRINT('Column "$ColumnName$" added to table "$TableName$"')]]>
+PRINT('Column "$ColumnName$" added to table "$TableName$"')
+]]>
       </Code>
     </Snippet>
   </CodeSnippet>

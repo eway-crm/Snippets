@@ -31,17 +31,19 @@
         </Literal>
       </Declarations>
       <Code Language="SQL"><![CDATA[DECLARE @ItemGUID UNIQUEIDENTIFIER
-	SET @ItemGUID = (SELECT ItemGUID FROM $TableName$ WHERE 1 = 0) -- TODO: Specify item
+    SET @ItemGUID = (SELECT ItemGUID FROM $TableName$ WHERE 1 = 0) -- TODO: Specify item
 UPDATE $TableName$
 SET ItemVersion = ItemVersion + 1,
-	Server_ItemChanged = SYSDATETIMEOFFSET(),
-	-- TODO: Add changes here
+    Server_ItemChanged = SYSDATETIMEOFFSET(),
+    -- TODO: Add changes here
 WHERE ItemGUID = @ItemGUID
 
 IF @@ROWCOUNT = 1
 BEGIN
-	EXEC eWaySP_InsertIntoItemChanges @ItemGUID = @ItemGUID, @FolderName = '$FolderName$', @Removed = 0
-END]]></Code>
+    EXEC eWaySP_InsertIntoItemChanges @ItemGUID = @ItemGUID, @FolderName = '$FolderName$', @Removed = 0
+END
+]]>
+      </Code>
     </Snippet>
   </CodeSnippet>
 </CodeSnippets>

@@ -24,34 +24,38 @@
           <ToolTip>Name of the view</ToolTip>
           <Default>vw_ViewName</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>Author</ID>
           <ToolTip>Name of the author</ToolTip>
           <Default>Author</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>Date</ID>
           <ToolTip>Date of the script creation</ToolTip>
           <Default>Date</Default>
         </Literal>
-		<Literal>
+        <Literal>
           <ID>Description</ID>
           <ToolTip>Description of the view</ToolTip>
           <Default>Description</Default>
         </Literal>
       </Declarations>
       <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[$ViewName$]'))
-DROP VIEW [dbo].[$ViewName$]
+BEGIN
+    DROP VIEW [dbo].[$ViewName$]
+END
 GO
 -- =============================================
--- Author:		$Author$
+-- Author:      $Author$
 -- Create date: $Date$
--- Description:	$Description$
+-- Description: $Description$
 -- =============================================
 CREATE VIEW [dbo].[$ViewName$]
 AS
 -- TODO: Add SELECT here
-GO]]></Code>
+GO
+]]>
+      </Code>
     </Snippet>
   </CodeSnippet>
 </CodeSnippets>
