@@ -18,5 +18,5 @@ Run the application from the VS Code terminal. Change source directory path appr
 
 ```
 cd SnippetConverter
-dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\azuredatastudio\User\snippets\eWay-CRM SQL.json"
+dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\azuredatastudio\User\snippets\eWay-CRM SQL.code-snippets"
 ```
