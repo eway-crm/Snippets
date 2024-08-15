@@ -37,18 +37,20 @@
       </Declarations>
       <Code Language="SQL"><![CDATA[DECLARE @$Variable$ AS $VariableType$
 DECLARE $CursorName$ CURSOR LOCAL FORWARD_ONLY FAST_FORWARD READ_ONLY FOR
-	-- TODO: Add SELECT statement
-	OPEN $CursorName$
+    -- TODO: Add SELECT statement
+OPEN $CursorName$
 
-	FETCH NEXT FROM $CursorName$ INTO @$Variable$
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-		-- TODO: Add cursor logic
+FETCH NEXT FROM $CursorName$ INTO @$Variable$
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- TODO: Add cursor logic
 
-		FETCH NEXT FROM $CursorName$ INTO @$Variable$
-	END
+    FETCH NEXT FROM $CursorName$ INTO @$Variable$
+END
 CLOSE $CursorName$
-DEALLOCATE $CursorName$]]></Code>
+DEALLOCATE $CursorName$
+]]>
+      </Code>
     </Snippet>
   </CodeSnippet>
 </CodeSnippets>

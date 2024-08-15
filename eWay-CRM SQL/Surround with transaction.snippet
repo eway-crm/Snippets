@@ -19,18 +19,20 @@
     </Header>
     <Snippet>
       <Code Language="SQL"><![CDATA[BEGIN TRY
-	BEGIN TRANSACTION
+    BEGIN TRANSACTION
 
-		$selected$
+        $selected$
 
-	COMMIT TRANSACTION
+    COMMIT TRANSACTION
 END TRY
 BEGIN CATCH
-	ROLLBACK TRANSACTION
-	DECLARE @Message NVARCHAR(MAX)
-	SET @Message = ERROR_MESSAGE();
-	RAISERROR(@Message, 16, 1)
-END CATCH]]></Code>
+    ROLLBACK TRANSACTION
+    DECLARE @Message NVARCHAR(MAX)
+    SET @Message = ERROR_MESSAGE();
+    RAISERROR(@Message, 16, 1)
+END CATCH
+]]>
+      </Code>
     </Snippet>
   </CodeSnippet>
 </CodeSnippets>
