@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+  </_locDefinition>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Update multiple items (local)</Title>
+      <Shortcut></Shortcut>
+      <Description>Update multiple items in eWay-CRM Desktop client database.</Description>
+      <Author>Roman Štefko</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>TableName</ID>
+          <ToolTip>Name of the table</ToolTip>
+          <Default>TableName</Default>
+        </Literal>
+        <Literal>
+          <ID>FolderName</ID>
+          <ToolTip>Name of the folder</ToolTip>
+          <Default>FolderName</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="SQL"><![CDATA[DECLARE @UpdatedItems TABLE
+(
+    ItemGUID UNIQUEIDENTIFIER,
+    ItemCreated DATETIMEOFFSET(2)
+)
+
+UPDATE $TableName$
+SET ItemVersion = ItemVersion + 1,
+    ItemChanged = SYSDATETIMEOFFSET(),
+    -- TODO: Add changes here
+OUTPUT inserted.ItemID, inserted.ItemChanged INTO @UpdatedItems
+WHERE
+    1 = 0 -- TODO: Add filter
+
+INSERT INTO ItemChanges (ItemGUID, ObjectTypeID, Removed, ItemCreated)
+SELECT ItemGUID, dbo.GetObjectTypeID('$FolderName$'), 0, ItemCreated
+FROM @UpdatedItems
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
