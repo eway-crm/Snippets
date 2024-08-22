@@ -92,8 +92,8 @@ BEGIN
 END
 GO
 
-EXEC dbo.eWaySP_SetProcedureDescription '$ProcedureName$', '$Description$.'
-EXEC dbo.eWaySP_SetProcedureParameterDescription '$ProcedureName$', '@$ParameterName$', '$ParameterDescription$.'
+EXEC dbo.eWaySP_SetProcedureDescription N'$ProcedureName$', N'$Description$.'
+EXEC dbo.eWaySP_SetProcedureParameterDescription N'$ProcedureName$', N'@$ParameterName$', N'$ParameterDescription$.'
 ]]>
       </Code>
     </Snippet>

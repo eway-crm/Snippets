@@ -49,7 +49,7 @@ END
 ALTER TABLE $TableName$
 ADD $ColumnName$ $ColumnType$ NULL
 
-EXEC eWaySP_SetTableColumnDescription N'$TableName$', '$ColumnName$', '$ColumnDescription$.'
+EXEC eWaySP_SetTableColumnDescription N'$TableName$', N'$ColumnName$', N'$ColumnDescription$.'
 
 PRINT('Column "$ColumnName$" added to table "$TableName$"')
 ]]>
