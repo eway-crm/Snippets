@@ -65,7 +65,7 @@
           <Default>UNIQUEIDENTIFIER</Default>
         </Literal>
       </Declarations>
-      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$ProcedureName$]') AND type in (N'P', N'PC'))
+      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$ProcedureName$]') AND [type] IN (N'P', N'PC'))
 BEGIN
     DROP PROCEDURE [dbo].[$ProcedureName$]
 END

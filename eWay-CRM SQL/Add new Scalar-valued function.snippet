@@ -65,7 +65,7 @@
           <Default>UNIQUEIDENTIFIER</Default>
         </Literal>
       </Declarations>
-      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$FunctionName$]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[$FunctionName$]') AND [type] IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
 BEGIN
     DROP FUNCTION [dbo].[$FunctionName$]
 END
