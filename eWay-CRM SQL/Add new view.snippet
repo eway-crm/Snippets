@@ -40,7 +40,7 @@
           <Default>Description</Default>
         </Literal>
       </Declarations>
-      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[$ViewName$]'))
+      <Code Language="SQL"><![CDATA[IF EXISTS (SELECT * FROM sys.views WHERE [object_id] = OBJECT_ID(N'[dbo].[$ViewName$]'))
 BEGIN
     DROP VIEW [dbo].[$ViewName$]
 END
