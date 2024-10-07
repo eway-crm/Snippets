@@ -20,11 +20,6 @@
     <Snippet>
       <Declarations>
         <Literal>
-          <ID>TableName</ID>
-          <ToolTip>Name of the table</ToolTip>
-          <Default>TableName</Default>
-        </Literal>
-        <Literal>
           <ID>FolderName</ID>
           <ToolTip>Name of the folder</ToolTip>
           <Default>FolderName</Default>
@@ -36,7 +31,7 @@
     ItemCreated DATETIMEOFFSET(2)
 )
 
-UPDATE $TableName$
+UPDATE $FolderName$
 SET ItemVersion = ItemVersion + 1,
     ItemChanged = SYSDATETIMEOFFSET(),
     -- TODO: Add changes here
