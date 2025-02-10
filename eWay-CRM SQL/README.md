@@ -4,7 +4,7 @@
 
 This folder contains SQL code snippets for server databases of eWay-CRM that can be used in Microsoft Management Studio.
 
-## Azure Data Studio
+## Azure Data Studio / VS Code
 
 To use the snippets in the Azure Data Studio you need to convert them into the new format.
 
@@ -19,4 +19,9 @@ Run the application from the VS Code terminal. Change source directory path appr
 ```
 cd SnippetConverter
 dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\azuredatastudio\User\snippets\eWay-CRM SQL.code-snippets"
+```
+
+For VS Code:
+```
+dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\Code\User\snippets\eWay-CRM SQL.code-snippets"
 ```
