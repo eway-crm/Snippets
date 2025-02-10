@@ -21,7 +21,7 @@ cd SnippetConverter
 dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\azuredatastudio\User\snippets\eWay-CRM SQL.code-snippets"
 ```
 
-For VS Code:
+To get snippets in VS Code run the code bellow.
 ```
 dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\Code\User\snippets\eWay-CRM SQL.code-snippets"
 ```
