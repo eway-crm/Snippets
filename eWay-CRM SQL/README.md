@@ -25,3 +25,5 @@ To get snippets in VS Code run the code bellow.
 ```
 dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\Code\User\snippets\eWay-CRM SQL.code-snippets"
 ```
+
+You can also download the [pre-created](https://raw.githubusercontent.com/eway-crm/Snippets/refs/heads/master/eWay-CRM%20SQL/eWay-CRM%20SQL.code-snippets) version.
