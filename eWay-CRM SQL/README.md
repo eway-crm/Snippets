@@ -33,3 +33,6 @@ Instructions for Azure Data Studio on MacOS:
 cd ~/Library/Application\ Support/azuredatastudio/User/snippets
 wget https://raw.githubusercontent.com/eway-crm/Snippets/refs/heads/master/eWay-CRM%20SQL/eWay-CRM%20SQL.code-snippets
 ```
+
+When snippets are installed you can use `Insert Snippet` command:
+![Insert Snippet](insert-snippet.png)
