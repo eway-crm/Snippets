@@ -27,3 +27,9 @@ dotnet run "\Snippets\eWay-CRM SQL" -o "%APPDATA%\Code\User\snippets\eWay-CRM SQ
 ```
 
 You can also download the [pre-created](https://raw.githubusercontent.com/eway-crm/Snippets/refs/heads/master/eWay-CRM%20SQL/eWay-CRM%20SQL.code-snippets) version.
+
+Instructions for Azure Data Studio on MacOS:
+```
+cd ~/Library/Application\ Support/azuredatastudio/User/snippets
+wget https://raw.githubusercontent.com/eway-crm/Snippets/refs/heads/master/eWay-CRM%20SQL/eWay-CRM%20SQL.code-snippets
+```
